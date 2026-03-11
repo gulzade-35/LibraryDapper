@@ -56,7 +56,9 @@ ________________________________________________________________________________
 | Veri Erişimi         |Dapper (Micro-ORM)  
 | Veritabanı         |SQL Server (1.1 Milyon Kayıt) 
 | Arayüz         |Argon Dashboard (Bootstrap 4 tabanlı) 
-| Programlama         |Asenkron (Async/Await) Mimari  
+| Programlama         |Asenkron (Async/Await) Mimari 
+
+___________________________________________________________________________________________________________________________________________________
 
 :framed_picture: **Ekran Görüntüleri**
 
