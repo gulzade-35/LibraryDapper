@@ -24,28 +24,23 @@ Projede temel amaç, milyonlarca satırlık veri içerisinde boğulmadan, kullan
 
 1 milyon veri içerisinde takılmadan gezinebilmek için SQL Server tarafında uyguladığım kritik indeks sorguları aşağıdadır:
 
-**1. Sayfalama ve Sıralama İndeksi**
+**Sayfalama ve Sıralama İndeksi**
 
 Sayfalama yaparken ORDER BY ISBN kullandığımız için, SQL'in tüm tabloyu taramasını engelleyen indeks:
 
-**SQL**
+**SQL:**
 CREATE NONCLUSTERED INDEX IX_Books_ISBN_Pagination 
 ON Books (ISBN) 
 INCLUDE (Book_Title, Book_Author, Year_Of_Publication, Publisher, Image_Url_S);
 
-**2. Kitap Adına Göre Hızlı Arama**
 
-Kullanıcı bir kitap ismi aradığında sonucun anında gelmesi için:
+📈 **Performans Sonucu**
 
-**SQL**
-CREATE NONCLUSTERED INDEX IX_Books_Title_Search 
-ON Books (Book_Title) 
-WHERE Book_Title IS NOT NULL;
+|İşlem Tipi          | İndekssiz Süre       | İndeksli Süre                   |
+|-------------    |------------------           |------------------  |
+| İlk 20 Kaydı Getirme         | 	~1.5 sn         | < 0.01 sn
+| 500.000. Satırdan Sonrasını Getirme         | 	~12 sn         | < 0.05 sn
 
-
-
-
-
-
+🛠 **Kullanılan Teknolojiler**
 
 
