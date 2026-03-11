@@ -1,0 +1,62 @@
+﻿@using LibraryDapperProject.ViewModel
+@model DashboardViewModel
+<div class="col-xl-4">
+    <div class="card shadow">
+        <div class="card-header bg-transparent">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>
+                    <h2 class="mb-0">En Çok Oy Alan Kitaplar</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="chart" style="height:350px;">
+                <canvas id="chart-most-rated" class="chart-canvas"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@using System.Text.Json
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+           var labels = @Html.Raw(
+                JsonSerializer.Serialize(Model.TopRatedBooks.Select(x => x.Title))
+        );
+
+    var values = @Html.Raw(
+                JsonSerializer.Serialize(Model.TopRatedBooks.Select(x => x.Count))
+        );
+
+        console.log("Labels:", labels);
+        console.log("Values:", values);
+
+        if (!labels.length) return;
+
+        var ctx = document.getElementById("chart-most-rated").getContext("2d");
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total Ratings',
+                    data: values
+                }]
+            },
+            options: {
+                indexAxis: 'y',   // yatay bar (kitap isimleri için ideal)
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+    });
+</script>
+
+

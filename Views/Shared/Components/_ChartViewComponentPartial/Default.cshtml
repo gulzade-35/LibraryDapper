@@ -1,0 +1,65 @@
+﻿
+<div class="col-xl-8 mb-5 mb-xl-0">
+    <div class="card bg-gradient-default shadow">
+        <div class="card-header bg-transparent">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h6 class="text-uppercase text-light ls-1 mb-1">Analiz</h6>
+                    <h2 class="text-white mb-0">Yıllara Göre Kitap Dağılımı</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <!-- Chart -->
+            <div class="chart">
+                <!-- Chart wrapper -->
+                <canvas id="chart-kitap-dagilim" class="chart-canvas"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var labels = @Html.Raw(Json.Serialize(ViewBag.ChartLabels));
+        var dataValues = @Html.Raw(Json.Serialize(ViewBag.ChartValues));
+
+        // JS TARAFINDA DA AYNI ID'YI ÇAĞIRIYORUZ
+        var ctx = document.getElementById('chart-kitap-dagilim').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels, // Alt eksen: Yıllar
+                datasets: [{
+                    label: 'Kitap Sayısı',
+                    data: dataValues, // Üst eksen: Adetler
+                    borderColor: '#5e72e4',
+                    backgroundColor: 'rgba(94, 114, 228, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#5e72e4'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#8898aa', font: { size: 12 } }
+                    },
+                    y: {
+                        grid: { color: '#32325d', drawBorder: false },
+                        ticks: { color: '#8898aa', font: { size: 12 } },
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: { display: false } // Üstteki küçük kareyi kapatır, daha temiz durur
+                }
+            }
+        });
+    });
+</script>

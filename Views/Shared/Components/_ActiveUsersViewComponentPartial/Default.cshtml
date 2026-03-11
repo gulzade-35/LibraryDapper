@@ -1,0 +1,45 @@
+﻿@using LibraryDapperProject.ViewModel
+@model DashboardViewModel
+
+<div class="col-xl-4">
+    <div class="card shadow">
+        <div class="card-header border-0">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="mb-0">En Aktif Kullanıcılar</h3>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <!-- Projects table -->
+            <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Kullanıcı ID</th>
+                        <th>Toplam Oy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ActiveUsers != null)
+                    {
+                        var index = 1;
+                        foreach (var item in Model.ActiveUsers)
+                        {
+                            <tr>
+                                <td>@index</td>
+                                <td>@item.Title</td>
+                                <td>
+                                    <span class="badge badge-info">
+                                        @item.Count
+                                    </span>
+                                </td>
+                            </tr>
+                            index++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

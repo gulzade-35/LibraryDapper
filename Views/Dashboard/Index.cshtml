@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+@await Component.InvokeAsync("_NavbarViewComponentPartial")
+<!-- End Navbar -->
+<!-- Header -->
+@await Component.InvokeAsync("_WidgetViewComponentPartial")
+
+<div class="container-fluid mt--7">
+    <div class="row">
+
+        @await Component.InvokeAsync("_ChartViewComponentPartial")
+
+        @await Component.InvokeAsync("_AvarageViewComponentPartial")
+
+    </div>
+    <div class="row mt-5">
+        @await Component.InvokeAsync("_AgeViewComponentPartial")
+        @await Component.InvokeAsync("_ActiveUsersViewComponentPartial")
+    </div>
+    @await Component.InvokeAsync("_FooterViewComponentPartial")
+</div>
+

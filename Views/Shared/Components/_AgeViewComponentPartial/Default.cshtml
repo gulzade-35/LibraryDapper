@@ -1,0 +1,40 @@
+﻿
+@model List<LibraryDapperProject.Dtos.GraphicDto>
+
+<div class="col-xl-8 mb-5 mb-xl-0">
+    <div class="card shadow">
+        <div class="card-header border-0">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="mb-0">Yaş Grupları Analizi</h3>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <!-- Projects table -->
+            <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Yaş Grubu</th>
+                        <th scope="col">Ortalama</th>
+                        <th scope="col">Toplam Oy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.AgeGroup</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    @item.AvgRating
+                                </span>
+                            </td>
+                            <td>@item.RatingCount</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

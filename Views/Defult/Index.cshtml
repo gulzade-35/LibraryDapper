@@ -1,0 +1,94 @@
+﻿@model List<LibraryDapperProject.Dtos.ResultBookDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+@await Component.InvokeAsync("_NavbarViewComponentPartial")
+
+@await Component.InvokeAsync("_WidgetViewComponentPartial")
+
+<div class="container-fluid mt--7">
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Kitap Tablosu</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Kitap Adı</th>
+                                <th scope="col">Yazar</th>
+                                <th scope="col">Yayın Yılı</th>
+                                <th scope="col">Yayın Evi</th>
+                                <th scope="col">ISBN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+                                            <a href="#" class="avatar rounded-circle mr-3">
+                                                <img alt="Image placeholder" src="@item.Image_Url_S">
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="mb-0 text-sm font-weight-bold">@item.Book_Title</span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        @item.Book_Author
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-dot mr-4">
+                                            <i class="bg-warning"></i> @item.Year_Of_Publication
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @item.Publisher
+                                    </td>
+                                    <td>
+                                        @item.ISBN
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer py-4">
+                    <nav aria-label="...">
+                        <ul class="pagination justify-content-end mb-0">
+                            @{
+                                int cp = ViewBag.CurrentPage;
+                            }
+
+                            <li class="page-item @(cp <= 1 ? "disabled" : "")">
+                                <a class="page-link" href="/Defult/Index?page=@(cp - 1)" tabindex="-1">
+                                    <i class="ni ni-bold-left"></i>
+                                </a>
+                            </li>
+
+                            @for (int i = Math.Max(1, cp - 2); i <= cp + 2; i++)
+                            {
+                                <li class="page-item @(i == cp ? "active" : "")">
+                                    <a class="page-link" href="/Defult/Index?page=@i">@i</a>
+                                </li>
+                            }
+
+                            <li class="page-item">
+                                <a class="page-link" href="/Defult/Index?page=@(cp + 1)">
+                                    <i class="ni ni-bold-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@await Component.InvokeAsync("_FooterViewComponentPartial")

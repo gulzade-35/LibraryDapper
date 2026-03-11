@@ -1,0 +1,22 @@
+﻿<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+@await Component.InvokeAsync("_HeadViewComponentPartial")
+
+<body class="">
+
+    @await Component.InvokeAsync("_SidebarViewComponentPartial")
+
+    <div class="main-content">
+
+        @RenderBody()
+
+    </div>
+
+    @await Component.InvokeAsync("_ScriptViewComponentPartial")
+
+</body>
+
+</html>
